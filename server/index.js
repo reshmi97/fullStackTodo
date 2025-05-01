@@ -2,18 +2,19 @@ import express from "express";
 import cors from "cors";
 import db from "./db.js";
 import bodyParser from "body-parser";
-import pg from "pg";
-
+import dotenv from "dotenv";
+dotenv.config();
 
 const app=express();
 const port=process.env.PORT || 3000;
+
+db.connect();
 
 app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
 //Route
-
 
 //create a todo
 app.post("/todos",async (req,res)=>{

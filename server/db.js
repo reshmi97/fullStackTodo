@@ -1,14 +1,15 @@
 import pg from "pg";
+import dotenv from "dotenv";
+dotenv.config();
 
 const db=new pg.Client({
-    host:"localhost",
-    port:5432,
-    database:"pernTodo",
+    host:process.env.Host,
+    port:process.env.DbPort,
+    database:process.env.Database,
     user:"postgres",
-    password:"Reshmi@123"
+    password:process.env.Password
     }
 );
 
-// db.connect();
 
 export default db;

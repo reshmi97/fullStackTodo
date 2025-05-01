@@ -2,12 +2,13 @@ import React,{Fragment,useEffect,useState} from "react";
 import EditTodo from "./EditTodo";
 
 const ListTodos=()=>{
+    const apiUrl=process.env.REACT_APP_API_URL;
     const [todos,setTodos]=useState([]);
 
     //Get todo function
     const getTodo=async ()=>{
         try {
-            const response=await fetch("http://localhost:3000/todos");
+            const response=await fetch(`${apiUrl}/todos`);
             const jsonData= await response.json();
             setTodos(jsonData);
             console.log(jsonData);
@@ -23,7 +24,7 @@ const ListTodos=()=>{
     //delete todo function
     const deleteTodo=async (id)=>{
         try {
-            const response=await fetch(`http://localhost:3000/todos/${id}`,{
+            const response=await fetch(`${apiUrl}/todos/${id}`,{
                 method:"DELETE"
             });
             setTodos(todos.filter(todo=> todo.id!==id));

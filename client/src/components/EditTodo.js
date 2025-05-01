@@ -1,6 +1,7 @@
 import React,{Fragment,useState} from "react";
 
 const EditTodo=(props)=>{
+    const apiUrl=process.env.REACT_APP_API_URL;
     const [description,setDescription]=useState(props.todo.description);
 
     //EDIT DESCRIPTION  
@@ -9,7 +10,7 @@ const EditTodo=(props)=>{
         try {
             const body={description};//this des is same as upper bagal wala of setdes but isse curly braces me lika hai taki ise object bana ja sake and object se json me convert karna assan hai but yadi ham simply des likenege to ye ek string hoga jise json me convert shayad sidha nahi kiya ja sakta hai 
             // console.log(description);
-            const response=await fetch(`http://localhost:3000/todos/${props.todo.id}`,{
+            const response=await fetch(`${apiUrl}/todos/${props.todo.id}`,{
                 method:"PATCH",
                 headers:{"content-Type":"application/json"},
                 body:JSON.stringify(body),
