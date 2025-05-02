@@ -4,12 +4,29 @@ import db from "./db.js";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
 dotenv.config();
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-const app=express();
-const port=process.env.PORT || 3000;
+// Required to get __dirname in ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const app = express();
+
+// Serve React frontend static files
+app.use(express.static(path.join(__dirname, '../client/build')));
+
+// Fallback route: serve React's index.html
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/build/index.html'));
+});
+const port=process.env.PORT || 5000;
 
 
-app.use(cors());
+app.use(cors({
+    origin: `${process.env.CLIENT_URL}`, // your frontend domain
+    credentials: true
+}));
 app.use(express.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
