@@ -12,7 +12,7 @@ const InputTodo=()=>{
         event.preventDefault();
         try{
             const body={description}
-            const response=await fetch(`${apiUrl}/todos`,{
+            const response=await fetch(`http://localhost:5000/todos`,{
                 method:"POST",
                 headers:{"content-Type":"application/json"},
                 body:JSON.stringify(body)
@@ -27,7 +27,7 @@ const InputTodo=()=>{
     return <Fragment>
         <h1 className="text-center mt-5">Todo List 📝</h1>
         <form className="d-flex mt-5" onSubmit={onSubmitForm}>
-            <input type="text" className="form-control" onChange={handleChange} value={description}/>
+            <input autoFocus type="text" className="form-control" onChange={handleChange} value={description}/>
             <button className="btn btn-success">ADD</button>
         </form>
     </Fragment>
